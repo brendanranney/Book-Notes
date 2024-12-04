@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Book Notes</h1>
+        <ul>
+            <% books.forEach(book => { %>
+                <li>
+                    <img src="<%= book.coverarturl %>" alt="Cover Art">
+                    <div class="review">
+                        <h2><%= book.title %></h2>
+                        <h3><%= book.author %></h3>
+                        <p><strong>Description:</strong> <%= book.description %></p>
+                        <p class="rating">
+                            <% 
+                            const fullStars = Math.floor(book.rating);
+                            const halfStar = book.rating % 1 >= 0.5;
+                            const emptyStars = 5 - Math.ceil(book.rating);
+                            %>
+                            <% for (let i = 0; i < fullStars; i++) { %>
+                                <span class="star">★</span>
+                            <% } %>
+                            <% if (halfStar) { %>
+                                <span class="star">☆</span>
+                            <% } %>
+                            <% for (let i = 0; i < emptyStars; i++) { %>
+                                <span class="star">☆</span>
+                            <% } %>
+                            <span>(<%= book.rating %> / 5)</span>
+                        </p>
+                        <p><strong>Review:</strong> <%= book.review %></p>
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+</body>
+</html>
